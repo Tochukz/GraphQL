@@ -1,0 +1,25 @@
+{
+  "name": "Learning-GraphQL-and-Relay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tochukz/Learning-GraphQL-and-Relay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tochukz/Learning-GraphQL-and-Relay/issues"
+  },
+  "homepage": "https://github.com/Tochukz/Learning-GraphQL-and-Relay#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.2.1"
+  }
+}
