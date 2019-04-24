@@ -3,9 +3,6 @@ const graphqlHTTP = require('express-graphql');
 const mySchema = require('./schema/main');
 const people = require('./data/people');
 
-const names = people.map(person => person.name);
-console.log(names);
-
 const app = express();
 
 app.use('/graphql', graphqlHTTP({
