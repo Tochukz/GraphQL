@@ -32,6 +32,12 @@ The $article varible is defined as an _int_ type and is require and must not be 
 To execute this generic query, pass a JSON object for the _variables_: `{"articleId" : 42}`  
 For HTTPP interface, the operation requestt can be sent using"    
 `http://mywebsite.me/graphql?query={...}&variables={...}`  
+For GraphiQL interface or GraphQL playground the variable are defined as the properties of an object in the _variables_ panel  
+```
+{
+    "articleId": 42
+}
+```
 
 ### Directives
 __Example 3: Using the @include and @skip directive.__
@@ -110,7 +116,7 @@ query TwoArticles {
 
 ### Fragments
 Fragments are like partial operations that are generic and resuable.  
-__Example 7: Using a fragment in place of the repeated comments complex feild in Example 6__
+__Example 7: Using a fragment in place of the repeated comments complex feild in Example 6__  
 ```
 query TwoArticles {
     firstArticle: article(articleId: 42) {
@@ -129,7 +135,8 @@ query TwoArticles {
 }
 ```
 The _CommentList_ fragment is defined for use in the _article_ field.  
-__Example 8: Defined fragment using directive and variable__
+
+__Example 8: Use directve and variable in a fragment definition__  
 ```
 query AricleComment($articleId Int!, $showAuthor Boolean!) {
     article (articleId: $articleId) {
@@ -148,7 +155,7 @@ query AricleComment($articleId Int!, $showAuthor Boolean!) {
 }
 ```
 
-__Example 9: Using inline fragments__
+__Example 9: Using inline fragments__  
 This inline fragment conditionally places a different value, articleId or commentId on the _nodeId_ property bases on the availability of either the Article or Comment named type.  
 ```
 query ArticleOrComment {
@@ -184,19 +191,53 @@ Note that the `on Type` section can be omitted in this format.
 
 ## Mutation Operation
 Mutations use field arguments as data input.  
-Mutation able both reading and writing at the same time.  
+Mutations have the capability of reading and writing at the same time.  
 
-__Example 11: Defining a basic mutation__   
+__Example 11: This mutation adds a new song and returns the added song from the DB.__
+```
+mutation createSong {
+    addSong(title: "No Scrubs", numberOne: true, performer: "TLC") {
+        id
+        title
+        nuumberOne
+    } 
+}
+```
+__Example 12: This mutation adds a comment to an article__   
 ```
 mutation AddNewComment {
-    addComment(
-        articleId: 42,
-        authorEmail: "markk@fb.com",
-        markdown: "GrapQL is clearly a **game changer**"
-    ) {
+    addComment(articleId: 42, authorEmail: "markk@fb.com", markdown: "GrapQL is clearly a **game changer**") {
         id
         formatedBody
         timestamp
     }
 }
 ```
+Mutations can also be used to update existing record or document in the database.  
+
+## Subscription Operation
+A subscription allows us to listen to the GraphQL API for real-time data changes over a websocket.  
+__Example 13: Sample subscription query to listen for new comments on an article__ 
+```
+subscription comments {
+    comment(articleId: 5) {
+        commentCount
+        comments {
+            authorEmail
+            commentText
+        }
+    }
+}
+```
+When testing subscription,  we can trigger a change, to see the subscription in action, by performing a mutation operation.  
+If you are usiing GraphQL playground, open a new tab and execute the mutation. For GraphiQL open a new browser window:  
+```
+mutation addComment {
+    addComment(articleId: 5, authorEmail: "me@gmail.com", commentText: "GraphQL ia awesome") {
+        articleId
+        authorEmail
+        commentText
+    }
+}
+```
+The resulting change should then be pushed to the _comments_ subscription(in the previous tab) via a websocket.  
