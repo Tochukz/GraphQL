@@ -1,4 +1,5 @@
 # Query and Schema
+## GraphQL Introspection    
 To use GraphQL's introspection capability to find out about the schema and the feilds it support you can use the *__type* field in  GraphiQL interface. Note that 'People' is the name of a root Query:    
 ```   
 query TypeFields {
@@ -7,6 +8,9 @@ query TypeFields {
             name
             description
             args {
+                name
+            }
+            type {
                 name
             }
         }
@@ -24,24 +28,17 @@ query QueryTypeName {
   }
 }
 ```
-
-
-**To read the list of directives a GraphQL server supports us the query:**      
+**To see all the Types available in the schema in a one-dimentional array**  
 ```
-query SchemaDirective {
-  __schema {
-    directives {
-      name
-      description
-      args{
-        name
-        description
-      }
+query {
+    __schema {
+        types {
+            name
+            description
+        }
     }
-  }
 }
 ```
-  
 **To read all the types for a schema use the ofType property like in the query:**   
 ```
 query TypeFields {
@@ -62,7 +59,44 @@ query TypeFields {
     }
 }
 ```
+**To read the list of directives a GraphQL server supports us the query:**      
+```
+query SchemaDirective {
+  __schema {
+    directives {
+      name
+      description
+      args{
+        name
+        description
+      }
+    }
+  }
+}
+```
+**To view all the fields that are available to a query** 
+```
+query roots {
+    __schema {
+        queryType {
+            ...typeFields
+        }
+        mutationType {
+            ...typeFields
+        }
+        subscriptionType {
+            ...typeFields
+        }
+    }
+}
 
+fragment typeFields on __Type {
+    name
+    fields {
+        name
+    }
+}
+```
 The GraphQL JavaScript reference implementation library has a built-in introspectionQuery that we can use to ask for a complete representation of the server's type system.  
 You can find this query if you search the library's GitHub repo (https://github.com/graphql/graphql-js) for introspectionQuery .  
 
@@ -212,6 +246,25 @@ query ResumeInformation {
             title
         }
    }
+}
+```
+You can also use names fragments to query a union type.  
+``` 
+query ResumetInformation {
+    ResumeSection  {
+        ...education 
+        ...experience
+    }
+}
+
+fragment educaton on Eduction {
+    schoolName
+    feildOfStudy
+}
+
+fragment experience on Experince {
+    companyName
+    title
 }
 ```
 
