@@ -1,0 +1,22 @@
+{
+  "name": "apollo-exp",
+  "version": "1.0.0",
+  "description": "GraphQL API for Photo Sharing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e js,json,graphql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.4.8",
+    "express": "^4.16.4",
+    "graphql": "^14.2.1",
+    "mongodb": "^3.2.3"
+  },
+  "devDependencies": {
+    "graphql-playground-middleware-express": "^1.7.12"
+  }
+}
