@@ -1,4 +1,4 @@
-const {users, photos, tags} = require('./data/test-data');
+const {users, photos, tags} = require('../data/test-data');
 const {GraphQLScalarType} = require('graphql');
 
 const resolvers = {
