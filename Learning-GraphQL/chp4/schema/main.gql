@@ -1,0 +1,243 @@
+scalar DateTime
+
+enum PhotoCatogory {
+  SELFIE
+  PORTRAIT
+  ACTION
+  LANDSCAPE
+  GRAPHIC
+}
+
+type User {
+  githubLogin: ID!
+  name: String
+  avatar:String
+  postedPhotos: [Photo]
+  inPhotos: [Photo!]!
+  friends: [Friendship!]!
+}
+
+# We call this object a through type because it is a node that is designed to connect two nodes.
+type Friendship {
+  friends: [User!]!
+  howLong: Int!
+  whereWeMet: Location
+}
+
+type Photo {
+  id: ID!
+  name: String!
+  url: String!
+  description: String
+  created: DateTime!
+  category: PhotoCategory!
+  postedBy: User!
+  taggedUsers: [User!]!
+}
+
+type Query {
+  totalUsers: Int!
+  allUsers[User!]!
+  totalPhotos: Int!
+  allPhotos:[Photo!]!
+}
+
+schema {
+  query: Query
+}
+
+# GraphQL’s built in scalar types includes (Int, Float, String, Boolean, ID) but you can defined custom scalar type such as DateTime as shown above.
+# You can declare custom scalars for any type that you need to validate.
+# The graphql-custom-types npm package contains some commonly used custom scalar types that you can quickly add to your Node.js GraphQL service.
+
+# It is a good idea to keep GraphQL services undirected when possible.
+# This provides our clients with the ultimate flexibility to create queries because they can start traversing the graph from any node.
+# The User and Photo type implements the undirected connection, as Photo has postedBy of type User and User has postedPhotos of type [Photo]
+
+# As you can see, a many-to-many connection consists of two one-to-many connections as evident in the inPhotos and taggedUsers field of User and Photo types respectively.
+
+
+### Defininng Union Types
+union User = Student | Worker;
+
+type Student {
+  studentId: ID!
+  school: String!
+  GraduationDate: DateTime!
+}
+
+type Worker {
+  name: String!
+  company: String!
+  experince: Int!
+}
+
+type UserQuery {
+  user: [User!]!
+}
+#It is possible to join as many types as we want under a single union.
+union Activity = StudyGroup | Workout  | Meal | Meeting | FreeTime
+type StudyGroup{}
+type Worker{}
+type Meal {}
+type FreeTime {}
+
+### Defining Interfaces
+interface Device {
+  screen: String!
+  color: String!
+  model: String!
+}
+
+type CellPhone implements Device {
+  screen: String!
+  color: String!
+  model: String!
+  memory: Boolean!
+  netword: String!
+}
+
+type Laptop implements Device {
+  screen: String!
+  color: String!
+  model: String!
+  disk: Float!
+  ram: Float!
+}
+
+type DeviceQuery {
+  device: [Device!]!
+}
+
+### Arguments
+type PersonQuery {
+  user(userID: ID!): User!
+  photo(userID: ID!): Photo!
+}
+
+#Optional Argument with default value
+type MaduQuery {
+  user(userID: ID = 1): User!
+}
+
+### Input Type
+# Input type is used to group arguments together as an input object
+input PostPhotoInput {
+  name: String!
+  description: String!
+  category: PhotoCategory=PORTRAIT
+}
+
+type NewPhoto {
+  addPhoto(potoInput: PostPhotoInput!): Photo!
+}
+
+# Now to mutate the app state through the AddPhoto type
+mutation PutPhoto($photoInput: PostPhotoInput!) {
+  addPhoto(photoInput: $photoInput ) {
+    id
+    url
+    created
+  }
+}
+# Variable
+#
+# {
+#   "photoInput": {
+#      "name": "Car Photo",
+#      "description": "Photo of my Car",
+#      "category": "LANDSCAPE"
+#   }
+#
+# }
+#
+
+# The argument will be sent to the server with the mutation under the key of "photoInput"
+
+# Input types can be nested.
+input PhotoFilter {
+  category: PhotoCategory
+  createdBetween: DateRange
+  taggedUsers: [ID!]
+  searchText: String
+}
+
+input DataRange {
+  start: DateTime!
+  end: DateTime!
+}
+
+input DataPage {
+  first: Int = 25
+  start: Int = 0
+}
+
+input DataSort {
+  sort: SortDirection = DESCENDING
+  sortBy: SortablePPhotoField = created
+}
+
+# Input types are resuable by different types and fields
+type Admin {
+  postedPhotos(filter: PhotoFilter paging: DataPage sorting: DataSort): [Photo!]!
+  inPhotos(filter: PhotoFilter paging:DataPage sorting: DataSort )
+}
+
+type SentPhoto {
+  taggedUser(sorting: DataSort): [User!]!
+}
+
+type QueryPhoto {
+    allUsers(paging: DataPage sorting: DataSort): [User!]!
+    allPhotos(filter: PhotoFilter paging: DataPage sorting: DataSort): [Photo!]!
+}
+
+# Now to query the allPhotos Type
+query getPhotos($filter:  PhotoFilter $paging: DataPage $sort: DataSort){
+    allPhotos(filter: $filer paging: $paging sort: $sort) {
+      id
+      name
+      url
+    }
+}
+
+# Variable
+#
+# {
+#    "filter": {
+#       "category"; "ACTION",
+#       "taggedUsers": ["Chucks", "Tochukz"],
+#       "createdBetween": {
+#           "start": "2018-11-06"
+#           "end": "2018-05-31"
+#       }
+#    },
+#    "page": {
+#       "first": 100
+#    }
+# }
+
+### Subscription
+# It will be up to us to make sure the subscriptions implement the PubSub design pattern along with some sort of real-time transport
+
+### Documentation
+"""
+This is a Car type
+"""
+type CarType {
+  """
+  The name of the Car
+  """
+  carName: String!
+
+  """
+  The year the car was made
+  """
+  carYear: Int!
+
+  carEngineSizes(
+    "No of sizes"
+     no: Int!
+  )
+
+}
