@@ -1,0 +1,48 @@
+query photoCount{
+  totalPhotos
+  allPhotos {
+    id
+    name
+    url
+    description
+  }
+}
+
+mutation newPhoto($input: PostPhotoInput!) {
+  postPhoto(input: $input){
+    id
+    name
+    category
+    description
+  }
+}
+
+query photos {
+  allPhotos {
+    name
+    url
+    postedBy {
+      name
+    }
+  }
+}
+
+query listPhotos {
+  allPhotos {
+    url
+    taggedUsers {
+      name
+    
+    }
+  }
+}
+
+# Variable
+# {
+#   "input": {
+#     "githubLogin": "gPlake",
+#     "name": "Child photo",
+#     "category": "LANDSCAPE",
+#     "description": "A photo of my cute child"
+#   }
+# }
