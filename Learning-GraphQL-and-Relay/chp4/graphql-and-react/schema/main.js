@@ -4,11 +4,11 @@ const QuoteType = new GraphQLObjectType({
     name: 'Quote',
     fields: {
         _id: {
-            type: GraphQLID            
+            type: GraphQLID
         },
         id: {
             type: GraphQLString,
-            resolve: obj => obj._id
+            resolve: parent => parent._id
         },
         text: {
             type: GraphQLString
@@ -16,7 +16,7 @@ const QuoteType = new GraphQLObjectType({
         author: {
             type: GraphQLString
         }
-        
+
     }
 });
 
