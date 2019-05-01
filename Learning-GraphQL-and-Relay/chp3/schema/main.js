@@ -51,7 +51,7 @@ const writeToQuotes = (filePath, line) => new Promise((resolve, reject) => {
     });
 });
 
-//Basic used of the above defined promise
+//Basic usage of the above defined promise
 const file = path.join(__dirname, '../data/quotes.log');
 readFromQuotes(file).then(data => console.log(data))
                     .catch(err => console.error(err));
