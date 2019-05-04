@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const {ApolloServer} = require('apollo-server-express');
 const expressPlayground = require('graphql-playground-middleware-express').default;
 const {readFileSync} = require('fs');
 const {MongoClient} = require('mongodb');
-require('dotenv').config();
 
-const typeDef = readFileSync('./typeDefs.graphql', 'UTF-8');
+
+const typeDefs = readFileSync('./typeDefs.graphql', 'UTF-8');
 const {resolvers} = require('./resolvers');
 
 async function start() {
@@ -14,9 +15,22 @@ async function start() {
 
     const client = await MongoClient.connect(MONGO_DB, {useNewUrlParser: true});
     const db = client.db();
-    const context = {db};
+    //const context = {db};
 
-    const server =  new  ApolloServer({typeDefs, resolvers, context});
+    /* Context can be an object or a function. For our application to work, we need it to be a function so that
+     * we can set the context every time there is a request. When context is a function, it is invoked for every
+     * GraphQL request.  The object that is returned by this function is the context that is sent to the resolver.
+     */
+    const server =  new  ApolloServer({
+                            typeDefs, 
+                            resolvers, 
+                            context: async ({req}) => {
+                                const githubToken = req.headers.authorization;
+                                const currentUser = await db.collection('users').findOne({githubToken})
+                                return {db, currentUser}
+                            }
+                        });
+                    
 
     server.applyMiddleware({app})
 
@@ -32,3 +46,37 @@ start()
 
 
 
+/** Queries */
+/*
+// Add photo
+ mutation post($input: PostPhotoInput!) {
+  postPhoto(input: $input) {
+    id
+    url
+    postedBy {
+      name 
+      avatar       
+    }
+  }
+}
+
+// Add Users
+mutation addUsers{
+  addFakeUsers(count: 1) {
+    name
+  }
+}
+
+// Get users token
+mutation authFakeUse {
+  fakeUserAuth(githubLogin: "purpleswan668") {
+    token
+  }
+}
+
+// Authorization with access token
+{
+  "Authorization": "e3b2112b3cc008185dcfa92a7e5fb62e3a4d7650"
+}
+
+*/
