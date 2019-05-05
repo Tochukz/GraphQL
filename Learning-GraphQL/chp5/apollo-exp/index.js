@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const {ApolloServer} = require('apollo-server-express');
 const expressPlayground = require('graphql-playground-middleware-express').default;
 const {readFileSync} = require('fs');
@@ -33,6 +34,8 @@ async function start() {
                     
 
     server.applyMiddleware({app})
+
+    app.use(express.static(path.join(__dirname, 'public')));
 
     app.get('/', (req, res, next) => {
         res.send("Welcome to Photo API")
