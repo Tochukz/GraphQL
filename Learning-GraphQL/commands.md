@@ -25,3 +25,16 @@ __Install mongodb__
 
 __Install dotenv__
 `$ npm install dotenv`
+
+__Install graphql-request__    
+`$ npm install graphql-request`    
+
+__Install webpack and babel__  
+`$ npm install webpack webpack-cli --save-dev`  
+`$ npm install babel-loader @babel-core @babel-preset/env  --save-dev` 
+
+__Install react and babel-preset-react__  
+`$ npm install @babel/preset-react --save-dev`  
+
+__Install react and react-dom__  
+`$ npm install react react-dom --save`  
