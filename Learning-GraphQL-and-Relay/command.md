@@ -9,7 +9,7 @@ Then in the Node code, you can tread the exported value by using this:
 `process.env.MONGO_URL`  
 ### Installing Express.js and express-graphql middleware package in one go
 `$ npm install express express-graphql --save`  
-## To  setup webpack and babel for react
+## Steps to setup Webpack and Babel for React application
 * Intsall webpack  
 `$ npm install webpack --save-dev`  
 * Install webpack-cli  
@@ -18,16 +18,16 @@ Then in the Node code, you can tread the exported value by using this:
 ```
 "script": {
   "build": "webpack-cli --mode production",
-  "watch": "webpack-cli --mode development --watch" 
+  "watch": "webpack-cli --mode development --watch"
 }
 ```
-* Install all babel-loaders and all required presets
-`npm i babel-loader @babel/core  @babel/preset-env @babel/preset-react "@babel/plugin-proposal-class-properties --save-dev`  
-* Create the .babel.rc file to configure babel.  
+* Install all babel-loaders and all required presets  
+`npm i babel-loader @babel/core  @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties --save-dev`  
+* Create the .babelrc file to configure babel.  
 ```
 {
     "presets" : [
-      "@babel/preset-env", 
+      "@babel/preset-env",
       "@babel/preset-react"
     ],
     "plugins": [
@@ -37,7 +37,15 @@ Then in the Node code, you can tread the exported value by using this:
 ```
 * Create the webpack.config.js file and define the webpack configuration.
 ```
+const path = require('path');
+
 module.exports = {
+  mode: "development",
+  entry: './public/js/app.js',
+  output: {
+    path: path.join(__dirname, 'public/js'),
+    filename: 'bundle.js'
+  },
   module: {
     rules: [
       {
