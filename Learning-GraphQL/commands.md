@@ -38,3 +38,7 @@ __Install react and babel-preset-react__
 
 __Install react and react-dom__  
 `$ npm install react react-dom --save`  
+
+__Install cors__  
+`$ npm install cors --save`  
+

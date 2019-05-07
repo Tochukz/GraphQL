@@ -60,8 +60,9 @@ const resolvers = {
               })
           )
 
-          await db.collection('users').insert(users);
-          return users;;
+          const {insertedIds} = await db.collection('users').insert(users);
+          users.id = insertedIds[0];
+          return users;
         },
         async fakeUserAuth(parent, {githubLogin}, {db}) {
           const user = await db.collection('users').findOne({githubLogin});
@@ -96,7 +97,8 @@ const resolvers = {
         */
         inPhotos: parent => tags.filter(tag => tag.userID == parent.githubLogin)
                                 .map(tag => tag.photoID)
-                                .map(photoID => photos.find(photo => photo.id === photoID))
+                                .map(photoID => photos.find(photo => photo.id === photoID)),
+        id: parent => parent._id
     },
     DateTime: new GraphQLScalarType({
       name: 'DateTime',

@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const {ApolloServer} = require('apollo-server-express');
 const expressPlayground = require('graphql-playground-middleware-express').default;
@@ -23,22 +24,23 @@ async function start() {
      * GraphQL request.  The object that is returned by this function is the context that is sent to the resolver.
      */
     const server =  new  ApolloServer({
-                            typeDefs, 
-                            resolvers, 
+                            typeDefs,
+                            resolvers,
                             context: async ({req}) => {
                                 const githubToken = req.headers.authorization;
                                 const currentUser = await db.collection('users').findOne({githubToken})
                                 return {db, currentUser}
                             }
                         });
-                    
+
 
     server.applyMiddleware({app})
 
+    app.use(cors());
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.get('/', (req, res, next) => {
-        res.send("Welcome to Photo API")
+        res.send("Welcome to the Apollo Photo Sharinig Service");
     });
     app.get('/playground', expressPlayground({endpoint: '/graphql'}));
 
@@ -49,7 +51,7 @@ start()
 
 
 
-/** Queries */
+/** Query Samples */
 /*
 // Add photo
  mutation post($input: PostPhotoInput!) {
@@ -57,8 +59,8 @@ start()
     id
     url
     postedBy {
-      name 
-      avatar       
+      name
+      avatar
     }
   }
 }

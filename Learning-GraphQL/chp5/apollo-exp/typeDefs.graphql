@@ -10,6 +10,7 @@ enum PhotoCategory {
 }
 
 type User {
+  id: ID!
   githubLogin: ID!
   name: String
   avatar: String
