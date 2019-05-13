@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  app:
+    container_name: apollo-exp
+    restart: always
+    build: .
+    ports: 
+      - "3000:3000"     
+    # depends_on:
+    #   - mongodb
+    networks:
+      - traefik
+      - linked-apollo-nodes
+    labels: 
+      - "traefik.frontend.rule=Host:apollo-exp.test"
+    environment:
+      DB_HOST: mongodb://localhost:27017/apollo-exp
+      CLIENT_ID: 1622d403b06489b05ac2
+      CLIENT_SECRET: 03c41e0d1de14c5a1cf2e196c894867b2bbbc3a7
+  # mongodb:
+  #   container_name: mongo
+  #   image: mongo
+  #   networks:
+  #     - linked-apollo-nodes
+  #   volumes:
+  #     - ./data:/home/app/data/db
+  #   ports:
+  #     - "27017:27017"
+networks: 
+  traefik:
+    external:
+      name: traefik-reverse-proxy
+  linked-apollo-nodes:
+    name: linked-apollo-nodes
+    driver: bridge
+
+       

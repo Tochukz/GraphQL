@@ -29,16 +29,26 @@ __Install dotenv__
 __Install graphql-request__    
 `$ npm install graphql-request`    
 
+## Chapter 6
 __Install webpack and babel__  
 `$ npm install webpack webpack-cli --save-dev`  
 `$ npm install babel-loader @babel-core @babel-preset/env  --save-dev` 
 
-__Install react and babel-preset-react__  
+__Install babel-preset-react__  
 `$ npm install @babel/preset-react --save-dev`  
 
 __Install react and react-dom__  
 `$ npm install react react-dom --save`  
 
-__Install cors__  
+__Install cors package__  
 `$ npm install cors --save`  
 
+#### To confiigure Apollo Client on React App
+* __Install create-react-app react cli__
+`$ npm install -g create-react-app`  
+
+* __Create React project__  
+`$ create-react-app photo-share-client`  
+
+* __Install graphql, apollo-boast and react-apollo__  
+`$ npm install graphql apollo-boost react-apollo`  

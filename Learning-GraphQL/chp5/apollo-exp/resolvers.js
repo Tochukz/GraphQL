@@ -192,7 +192,3 @@ const resolvers = {
   * 
   *  The Server will authenticate the user against a user in the database using this access_token found in the Authorization header.
   */
-
-
-
- 

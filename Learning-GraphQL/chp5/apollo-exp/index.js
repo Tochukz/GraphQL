@@ -44,7 +44,7 @@ async function start() {
     });
     app.get('/playground', expressPlayground({endpoint: '/graphql'}));
 
-    app.listen({port: 4000}, () => console.log(`GraphQL Server running @ localhost:4000${server.graphqlPath}`));
+    app.listen({port: 4000}, {hostname: 'apollo-exp'}, () => console.log(`GraphQL Server running @ localhost:4000${server.graphqlPath}`));
 }
 
 start()
