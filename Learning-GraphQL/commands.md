@@ -43,12 +43,12 @@ __Install react and react-dom__
 __Install cors package__  
 `$ npm install cors --save`  
 
-#### To confiigure Apollo Client on React App
-* __Install create-react-app react cli__
+#### To configure Apollo Client on React App
+1. __Install create-react-app react cli globally__  
 `$ npm install -g create-react-app`  
 
-* __Create React project__  
+2. __Create React project__  
 `$ create-react-app photo-share-client`  
 
-* __Install graphql, apollo-boast and react-apollo__  
-`$ npm install graphql apollo-boost react-apollo`  
+3. __Install graphql, apollo-boast and react-apollo__  
+`$ yarn add graphql apollo-boost react-apollo`  
