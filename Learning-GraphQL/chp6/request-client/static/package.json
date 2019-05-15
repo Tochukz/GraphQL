@@ -1,7 +1,7 @@
 {
   "name": "static",
   "version": "1.0.0",
-  "description": "",
+  "description": "GraphQL Client using graphql-request package",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,8 +20,6 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "graphql-request": "^1.8.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "graphql-request": "^1.8.2"
   }
 }
