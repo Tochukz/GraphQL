@@ -4,6 +4,7 @@ import {request} from 'graphql-request';
 
 //const url = `${window.origin}/graphql`;
 const url = 'http://localhost:4000/graphql';
+//const url = 'http://e7848751.ngrok.io/graphql';
 
 const query = `
   query listUsers {
