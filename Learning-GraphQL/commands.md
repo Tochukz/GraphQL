@@ -52,3 +52,9 @@ __Install cors package__
 
 3. __Install graphql, apollo-boast and react-apollo__  
 `$ yarn add graphql apollo-boost react-apollo`  
+
+__Install react-router-dom__  
+`$ yarn  add react-router-dom`  
+
+__Install apolo-cache-persist__  
+`$ yarn add apollo-cache-persist`  
