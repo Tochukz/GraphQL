@@ -6,7 +6,7 @@ You need to formally define the types that your API will expose. This collection
 ## Chapter 5
 __Install apollo-server adn graphql__  
 `$ npm install apollo-server graphql`   
- 
+
 __Remove apollo-server__  
 `$ npm remove apollo-server`  
 
@@ -32,7 +32,7 @@ __Install graphql-request__
 ## Chapter 6
 __Install webpack and babel__  
 `$ npm install webpack webpack-cli --save-dev`  
-`$ npm install babel-loader @babel-core @babel-preset/env  --save-dev` 
+`$ npm install babel-loader @babel-core @babel-preset/env  --save-dev`
 
 __Install babel-preset-react__  
 `$ npm install @babel/preset-react --save-dev`  
@@ -58,3 +58,9 @@ __Install react-router-dom__
 
 __Install apolo-cache-persist__  
 `$ yarn add apollo-cache-persist`  
+
+## Chapter 7
+Apollo Server already supports subscriptions. It wraps a couple of npm packages that are routinely used to set up WebSockets in GraphQL applications: _graphql-subscriptions_ and _subscriptions-transport-ws._  By default, Apollo Server sets up a WebSocket at ws://localhost:4000.  
+
+__Adding the WebsocketLink to the client app__   
+`$ yarn add apollo-link-wp apollo-utilities`     
