@@ -37,7 +37,7 @@ query listPhotos {
   }
 }
 
-# Variable
+# $input Variable for newPhoto mutation
 # {
 #   "input": {
 #     "githubLogin": "gPlake",
@@ -46,3 +46,23 @@ query listPhotos {
 #     "description": "A photo of my cute child"
 #   }
 # }
+
+# HTTP HEADER for newPhoto mutation
+#
+# {
+#  "Authorization": "0e1fdd6365cb6504e5c3620e42b164fdd67af664"  
+#  }
+#
+
+#
+# // Subscription Operation Sample
+#  subscription {
+#    newPhoto {
+#      url
+#      category 
+#      postedBy {
+#        githubLogin
+#        avater
+#      }
+#    }
+#  }
