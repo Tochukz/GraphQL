@@ -32,7 +32,7 @@ query listPhotos {
     url
     taggedUsers {
       name
-    
+
     }
   }
 }
@@ -50,7 +50,7 @@ query listPhotos {
 # HTTP HEADER for newPhoto mutation
 #
 # {
-#  "Authorization": "0e1fdd6365cb6504e5c3620e42b164fdd67af664"  
+#  "Authorization": "<authorization-key>"  
 #  }
 #
 
@@ -59,7 +59,7 @@ query listPhotos {
 #  subscription {
 #    newPhoto {
 #      url
-#      category 
+#      category
 #      postedBy {
 #        githubLogin
 #        avater
