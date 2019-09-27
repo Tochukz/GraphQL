@@ -26,4 +26,8 @@ app.listen(3000, () => console.info("Express app runing on port 3000"));
 /**
  * Make a request with a URL query string as follows:
  * http://localhost:3000/graphql?query={peopleCount}
+ *
+ * Query all the fiiels in the schema directly on the browser location bar by doing
+ * http://localhost:3000/graphql?query={peopleCount names{name} employee(employeeId: 2){firstName lastName} person(name: "Chukwudi"){name city}}
+ *
  */

@@ -21,16 +21,16 @@ module.exports = schema;
 
 /**
  * resolver function argument definition
- * 
+ *
  * resolve(parent, args, {db})
- * 
- * parent: get passes from the graphql function, same as the third argument of graphql() i.e rootValue 
- * args: object whose properites are the arguments passed by the client its the query.
- * {db}: get passed from the graphql  function, same as the fourth argument of the  graphql() i.e contextValue
+ *
+ * parent: get passed from the graphql function, same as the third argument of graphql() i.e rootValue
+ * args: object whose properites are the arguments passed by the client it is the query argumennt e.g http://localhost:3000?graphql={employee(employeeId: 3)}". args.employeeId == 3
+ * {db}: get passed from the graphql function, same as the fourth argument of the  graphql() i.e contextValue
  */
 
 
-/** GraphQL arguments deefined
+/** GraphQL arguments defined
 *
 * graphql(schema, query, rootValue, contextValue)
 *

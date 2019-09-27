@@ -9,7 +9,7 @@ const readLineInterface = readline.createInterface({
     output: process.stdout
 });
 
-/* 
+/*
 //This variable should be set as a Node process environment variable using the export command
 const MONGO_URL = 'mongodb://127.0.0.1:27017/test';
 
@@ -17,7 +17,7 @@ const MONGO_URL = 'mongodb://127.0.0.1:27017/test';
 MongoClient.connect(MONGO_URL, {useNewUrlParser: true}, (err, db) => {
     assert.equal(null, err);
     console.log("Connection to MongoDB is successful\n")
-     
+
     // console.log("collection" in db) // See if db has 'collection' property or method
     // console.log(Object.keys(db)); // See all properties/methods of db
 
@@ -52,5 +52,5 @@ client.connect(function(err) {
 * schema: is the json object holding the fields the client and query
 * query: is the json object passed by the client as a query
 * rootValue: get passed as the first argument to the resolver functions on the top level fields
-* contactValue: global object which GraphQL engine passes to all the resolver functions as their third  argument.
+* contextValue: global object which GraphQL engine passes to all the resolver functions as their third  argument.
 */
