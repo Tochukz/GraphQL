@@ -15,7 +15,7 @@ The code samples are modified to my taste and understanding for easy future refe
 * Schema design
 * Query and Schema ([query-and-schema.md](https://github.com/Tochukz/GraphQL/blob/master/Learning-GraphQL-and-Relay/chp3/query-and-schema.md))
 
-### Chapter 4: Configutaing React Application to Use Relay
+### Chapter 4: Configuring React Application to Use Relay
 * Graphql and React
 
 
@@ -42,5 +42,5 @@ The code samples are modified to my taste and understanding for easy future refe
   GraphQL  client built from create-react-app scaffolding(react, react-dom), react-router-dom,  graphql, react-apollo, apollo-boost and apollo-cache-persist
 * __React-client__   
   GraphQL client using graphql-request, react and react-dom
-* __Request-client__ 
+* __Request-client__   
   GraphQL client using graphql-request
